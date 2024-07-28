@@ -64,21 +64,6 @@ const images = [
   },
 ];
 
-let id = 0;
-for (let i = 0; i < images.length; i++) {
-  images[i].id = id;
-  id += 1; 
-}
-
-//--- add gallery container ----//
-
-const galleryBlock = document.querySelector('body');
-
-const galleryContainer = gallery => {
-    return '<ul class="gallery"></ul>'
-}
-galleryBlock.innerHTML = galleryContainer();
-
 
 // ---create image cards ----//
 
@@ -100,38 +85,30 @@ const imageCardsArrey = images.map(image => createImageCards(image)).join('');
 const imageCards = document.querySelector('.gallery');
 imageCards.innerHTML = imageCardsArrey;
 
-// ---add id----//
-id = 0;
-const imageArreyEl = document.querySelectorAll('.gallery-item');
-imageArreyEl.forEach(image => {
-  image.setAttribute('id', `${id}`)
-  image.dataset.id = id;
-  id += 1;  
-});
+
 
 // ---add listener----//
 
 const onCardClick = event => {
   event.preventDefault()
-  if (event.target === event.currentTarget) {
-    return;
-  }
-  const imageCardEl = event.target.closest('.gallery-item'); 
-  const imageCardId = Number(imageCardEl.dataset.id);
+  if (event.target.nodeName === "IMG") {
+    const imageCardEl = event.target.closest('.gallery-item');
+    const imageCard = event.target.dataset.source;
+    const imageInfo = images.find(image => image.original === imageCard);
+    
+    const modalImageCard = basicLightbox.create(`
+     <div class="modal">        
+     <img
+       class="gallery-image-js"
+       src="${imageInfo.original}"
+       data-source="${imageInfo.original}"
+       alt="${imageInfo.description}">
+       <p class='gallery-image-text-js' > ${imageInfo.description}</p>
+     </div>
+ `)
+    modalImageCard.show()
+  };
   
-  const imageInfo = images.find(image => image.id === imageCardId);
-  
-  const modalImageCard = basicLightbox.create(`
-    <div class="modal">        
-    <img
-      class="gallery-image-js"
-      src="${imageInfo.original}"
-      data-source="${imageInfo.original}"
-      alt="${imageInfo.description}">
-      <p class='gallery-image-text-js' > ${imageInfo.description}</p>
-    </div>
-`)
-modalImageCard.show()
-}
+};
 
 imageCards.addEventListener('click', onCardClick);

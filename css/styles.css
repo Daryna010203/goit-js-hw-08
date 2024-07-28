@@ -46,7 +46,7 @@ margin: 0 auto;
 .gallery-image-js {
   width: 1112px;
   height: 640px;
-  object-fit: cover;  
+  object-fit: cover;   
 }
 
 .gallery-image-text-js{
