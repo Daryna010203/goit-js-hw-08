@@ -1,0 +1,55 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+ul,
+ol {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+img {
+  display: block;
+}
+
+body {
+padding: 24px;
+margin: 0 auto;
+}
+
+.gallery {
+  width: 1440px;  
+  padding-left: 132px;
+  padding-right: 132px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+
+.gallery-image {
+  width: 360px;
+  height: 200px;
+  object-fit: cover;  
+}
+
+
+.gallery-image-js {
+  width: 1112px;
+  height: 640px;
+  object-fit: cover;  
+}
+
+.gallery-image-text-js{
+color: beige;
+font-size: 20px;
+}
